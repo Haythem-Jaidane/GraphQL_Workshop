@@ -1,0 +1,42 @@
+type Logement{
+    reference:Int
+    adresse:String
+    delegation:String
+    gouvernorat:String
+    type:Type
+    description:String
+    prix:Float
+}
+enum Type{
+    Studio
+    Appartement
+    Villa
+    EtageVilla
+}
+type RendezVous{
+    id:Int
+    date:String
+    heure:String
+    logement:Logement
+    numTel:String
+}
+type Query{
+    getALLrdv:[RendezVous]
+    getRenderVousByLog(refLog:Int):[RendezVous]
+    getRenderVousById(id:Int): RendezVous
+
+    getALLlogement: [Logement]
+    getLogementByRef(refLog: Int) : Logement
+    getLogementByType(type: String): [Logement]
+}
+
+type Mutation{
+    CreateRendezVous(id:Int,date:String,heure:String,refLog:Int,num:String): RendezVous
+    UpdateRendezVous(id:Int,date:String,heure:String,num:String): Boolean
+    DelateRendezVous(id:Int): Boolean
+}
+
+schema {
+    query:Query
+    mutation: Mutation
+}
